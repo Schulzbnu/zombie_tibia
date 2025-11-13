@@ -3,7 +3,7 @@ GuildRefuges.configs = {
     initial = {
         name = "Abrigo Inicial",
         loadingMap = "refugio_inicial",
-        mapFile = "data/world/refugio_inicial.otbm",
+        mapFile = "data/world/map_2.otbm",
         teleportPosition = Position(1123, 1052, 7),
         requiredItems = {
             {id = 5901, count = 200, name = "tábuas de madeira"},
