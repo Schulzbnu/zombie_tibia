@@ -12,6 +12,7 @@ Documentação estruturada do sistema de Refúgio controlável por guildas, cobr
 - **Requisitos**: o jogador precisa ser líder (rank 3) de uma guilda ativa.
 - **Tributo inicial**: 200 tábuas de madeira (`itemid: 5901`), 50 blocos de pedra (`itemid: 5880`) e 30 lingotes de metal (`itemid: 5887`).
 - **Resultado**: registra a guilda como proprietária do Abrigo Inicial, grava a configuração no banco (`guild_refuges`) e carrega o mapa `data/world/refugio_inicial.otbm`, teletransportando o líder para a posição configurada.
+- **Persistência do mapa**: durante a inicialização do servidor todos os mapas com entrada em `guild_refuges` são carregados automaticamente para manter os abrigos ativos já construídos.
 - **Configuração dos refúgios**: toda a lista de abrigos e seus requisitos ficam centralizados em `data/lib/core/guild_refuges.lua`. Cada NPC que usa `refuge_keeper.lua` precisa informar o `refuge_key` correspondente no arquivo XML para ficar responsável apenas pelo seu abrigo.
 
 ## Evolução por Nível
