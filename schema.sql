@@ -201,6 +201,23 @@ CREATE TABLE IF NOT EXISTS `guildwar_kills` (
   FOREIGN KEY (`warid`) REFERENCES `guild_wars` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
 
+CREATE TABLE IF NOT EXISTS `guild_refuges` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(64) NOT NULL,
+  `guild_id` int NOT NULL,
+  `leader_id` int NOT NULL,
+  `level` tinyint unsigned NOT NULL DEFAULT '1',
+  `loading_map` varchar(80) NOT NULL,
+  `created_at` int unsigned NOT NULL,
+  `updated_at` int unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `guild_refuges_guild` (`guild_id`),
+  UNIQUE KEY `guild_refuges_name` (`name`),
+  UNIQUE KEY `guild_refuges_map` (`loading_map`),
+  FOREIGN KEY (`guild_id`) REFERENCES `guilds` (`id`) ON DELETE CASCADE,
+  FOREIGN KEY (`leader_id`) REFERENCES `players` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
+
 CREATE TABLE IF NOT EXISTS `houses` (
   `id` int NOT NULL AUTO_INCREMENT,
   `owner` int NOT NULL,
@@ -357,7 +374,7 @@ CREATE TABLE IF NOT EXISTS `towns` (
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
 
-INSERT INTO `server_config` (`config`, `value`) VALUES ('db_version', '29'), ('motd_hash', ''), ('motd_num', '0'), ('players_record', '0');
+INSERT INTO `server_config` (`config`, `value`) VALUES ('db_version', '31'), ('motd_hash', ''), ('motd_num', '0'), ('players_record', '0');
 
 DROP TRIGGER IF EXISTS `ondelete_players`;
 DROP TRIGGER IF EXISTS `oncreate_guilds`;
