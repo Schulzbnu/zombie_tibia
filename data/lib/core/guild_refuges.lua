@@ -14,6 +14,7 @@ GuildRefuges.configs = {
 }
 
 GuildRefuges._loadedMaps = GuildRefuges._loadedMaps or {}
+GuildRefuges._loadedMapFiles = GuildRefuges._loadedMapFiles or {}
 
 local function normalizeId(refugeId)
     if type(refugeId) ~= "string" then
@@ -48,4 +49,18 @@ function GuildRefuges.markMapLoaded(refugeId)
     if normalized then
         GuildRefuges._loadedMaps[normalized] = true
     end
+end
+
+function GuildRefuges.isMapFileLoaded(mapFile)
+    if type(mapFile) ~= "string" then
+        return false
+    end
+    return GuildRefuges._loadedMapFiles[mapFile] or false
+end
+
+function GuildRefuges.markMapFileLoaded(mapFile)
+    if type(mapFile) ~= "string" then
+        return
+    end
+    GuildRefuges._loadedMapFiles[mapFile] = true
 end

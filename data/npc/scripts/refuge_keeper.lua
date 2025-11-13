@@ -14,8 +14,6 @@ refugeKey = refugeKey:lower()
 npcHandler.refugeKey = refugeKey
 npcHandler.refugeConfig = GuildRefuges.requireConfig(refugeKey)
 
-local loadedMaps = {}
-
 local function getRefugeConfig()
     return npcHandler.refugeConfig
 end
@@ -136,20 +134,39 @@ end
 
 local function ensureMapLoaded(player, config)
     local key = getRefugeKey()
-    if GuildRefuges.isMapLoaded(key) or loadedMaps[config.mapFile] or not config.mapFile then
+    local mapFile = config.mapFile
+
+    if not mapFile or mapFile == "" then
+        GuildRefuges.markMapLoaded(key)
         return true
     end
 
-    local fileHandle = io.open(config.mapFile, "r")
+    if GuildRefuges.isMapLoaded(key) or GuildRefuges.isMapFileLoaded(mapFile) then
+        GuildRefuges.markMapLoaded(key)
+        GuildRefuges.markMapFileLoaded(mapFile)
+        return true
+    end
+
+    local teleportPosition = config.teleportPosition
+    if teleportPosition then
+        local tile = Tile(teleportPosition)
+        if tile then
+            GuildRefuges.markMapLoaded(key)
+            GuildRefuges.markMapFileLoaded(mapFile)
+            return true
+        end
+    end
+
+    local fileHandle = io.open(mapFile, "r")
     if not fileHandle then
-        player:sendTextMessage(MESSAGE_EVENT_ADVANCE, string.format("O arquivo de mapa %s não foi encontrado. Avise a equipe administrativa.", config.mapFile))
+        player:sendTextMessage(MESSAGE_EVENT_ADVANCE, string.format("O arquivo de mapa %s não foi encontrado. Avise a equipe administrativa.", mapFile))
         return false
     end
     fileHandle:close()
 
-    Game.loadMap(config.mapFile)
-    loadedMaps[config.mapFile] = true
+    Game.loadMap(mapFile)
     GuildRefuges.markMapLoaded(key)
+    GuildRefuges.markMapFileLoaded(mapFile)
     return true
 end
 
