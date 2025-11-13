@@ -42,4 +42,22 @@ function onStartup()
 		local position = town:getTemplePosition()
 		db.query("INSERT INTO `towns` (`id`, `name`, `posx`, `posy`, `posz`) VALUES (" .. town:getId() .. ", " .. db.escapeString(town:getName()) .. ", " .. position.x .. ", " .. position.y .. ", " .. position.z .. ")")
 	end
+	local refugeResultId = db.storeQuery("SELECT `loading_map` FROM `guild_refuges`")
+	if refugeResultId then
+		repeat
+			local loadingMap = result.getString(refugeResultId, "loading_map")
+			local refugeKey, config = GuildRefuges.getKeyByLoadingMap(loadingMap)
+			if refugeKey and config then
+				local success, errorMessage = GuildRefuges.ensureMapLoaded(refugeKey, config)
+				if not success and errorMessage then
+					print(string.format("[GuildRefuges] Falha ao carregar o mapa '%s' na inicialização: %s", loadingMap, errorMessage))
+				elseif success then
+					print(string.format("[GuildRefuges] Mapa '%s' carregado na inicialização.", loadingMap))
+				end
+			else
+				print(string.format("[GuildRefuges] Nenhuma configuração encontrada para loading_map '%s' na inicialização.", loadingMap))
+			end
+		until not result.next(refugeResultId)
+		result.free(refugeResultId)
+	end
 end
