@@ -28,12 +28,13 @@
 	<talkaction words="/summon" separator=" " script="place_summon.lua" />
 	<talkaction words="/chameleon" separator=" " script="chameleon.lua" />
 	<talkaction words="/addskill" separator=" " script="add_skill.lua" />
-	<talkaction words="/mccheck" script="mccheck.lua" />
-	<talkaction words="/ghost" script="ghost.lua" />
-	<talkaction words="/clean" script="clean.lua" />
-	<talkaction words="/hide" script="hide.lua" />
-	<talkaction words="/reload" separator=" " script="reload.lua" />
-	<talkaction words="/raid" separator=" " script="force_raid.lua" />
+        <talkaction words="/mccheck" script="mccheck.lua" />
+        <talkaction words="/ghost" script="ghost.lua" />
+        <talkaction words="/clean" script="clean.lua" />
+        <talkaction words="/instance" separator=" " script="generate_dungeon_instance.lua" />
+        <talkaction words="/hide" script="hide.lua" />
+        <talkaction words="/reload" separator=" " script="reload.lua" />
+        <talkaction words="/raid" separator=" " script="force_raid.lua" />
 
 	<!-- player talkactions -->
 	<talkaction words="!buypremium" script="buyprem.lua" />
