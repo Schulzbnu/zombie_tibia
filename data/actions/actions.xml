@@ -7,6 +7,14 @@
 	<action fromid="7759" toid="7762" script="other/enchanting.lua" />
 	<action itemid="24739" script="other/enchanting.lua" />
 
+	<!-- data/actions/actions.xml -->
+	<action itemid="1950" script="map_instance.lua" /> 
+	<!-- ou usando actionid (mais comum) -->
+	<action actionid="5000" script="map_instance.lua" />
+	<action actionid="5001" script="map_instance.lua" />
+	<action actionid="5002" script="map_instance.lua" />
+
+
 	<!-- Market -->
 	<action itemid="14405" function="market" />
 

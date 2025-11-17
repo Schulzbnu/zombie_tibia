@@ -6,4 +6,9 @@
 	<!--
 	<globalevent name="timer_example" time="12:00:00" script="my_script.lua" />
 	-->
+
+	<!-- data/globalevents/globalevents.xml -->
+<globalevent name="map_instances_cleanup" interval="30000" script="map_instances_cleanup.lua" /> 
+<!-- interval em ms: 30000 = 30s -->
+
 </globalevents>
